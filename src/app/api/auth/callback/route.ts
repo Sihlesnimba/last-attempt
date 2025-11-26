@@ -5,7 +5,7 @@ export async function GET(request: NextRequest) {
   const code = searchParams.get('code');
   const APP_ID = process.env.DERIV_APP_ID;
 
-  if (!code) return new Response('No code', { status: 400 });
+  if (!code) return new Response('Missing code', { status: 400 });
 
   const res = await fetch('https://oauth.deriv.com/oauth2/token', {
     method: 'POST',
@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
       grant_type: 'authorization_code',
       code,
       client_id: APP_ID,
-      redirect_uri: 'https://yourdomain.com/callback',
+      redirect_uri: 'http://localhost:3000/callback',   // ← SAME DOMAIN AS ABOVE
     }),
   });
 

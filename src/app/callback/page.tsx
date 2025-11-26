@@ -9,14 +9,10 @@ export default function Callback() {
   const code = searchParams.get('code');
 
   useEffect(() => {
-    if (!code) {
-      router.push('/');
-      return;
-    }
+    if (!code) return router.push('/');
 
-    // Exchange code → get tokens
     fetch(`/api/auth/callback?code=${code}`)
-      .then(res => res.json())
+      .then(r => r.json())
       .then(data => {
         if (data.access_token) {
           localStorage.setItem('deriv_token', data.access_token);
@@ -26,8 +22,8 @@ export default function Callback() {
   }, [code, router]);
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <p className="text-xl">Connecting to your Deriv account...</p>
+    <div className="flex items-center justify-center min-h-screen text-xl">
+      Connecting to your Deriv account...
     </div>
   );
 }
