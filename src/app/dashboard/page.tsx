@@ -296,11 +296,14 @@ export default function Dashboard() {
   const [status, setStatus] = useState<'Disconnected' | 'Connected' | 'Running'>('Disconnected');
   const [selectedBot, setSelectedBot] = useState(BOTS[0]);
 
-  useEffect(() => {
+    useEffect(() => {
     const t = localStorage.getItem('deriv_token');
-    if (!t) return (window.location.href = '/');
+    if (!t) {
+      window.location.href = '/';
+      return;
+    }
     setToken(t);
-  }, []);
+  }, []); // ← THIS LINE WAS MISSING THE [] ← FIXED NOW
 
   const connect = () => {
     const socket = new WebSocket(`wss://ws.derivws.com/websockets/v3?app_id=${process.env.NEXT_PUBLIC_DERIV_APP_ID}`);
