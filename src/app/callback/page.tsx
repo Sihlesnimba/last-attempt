@@ -1,7 +1,7 @@
 // src/app/callback/page.tsx
 'use client';
 
-import { useEffect, suspense } from 'react';
+import { useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 
 export default function Callback() {
@@ -29,11 +29,11 @@ export default function Callback() {
   }, [code, router]);
 
   return (
-    <div className="flex items-center justify-center min-h-screen text-xl text-white">
+    <div className="flex items-center justify-center min-h-screen text-xl text-white bg-gray-900">
       Connecting to your Deriv account...
     </div>
   );
 }
 
-// This line fixes the suspense error
+// This one line fixes everything — no Suspense import needed
 export const dynamic = 'force-dynamic';
